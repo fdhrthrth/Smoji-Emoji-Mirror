@@ -1,12 +1,7 @@
-name: 构建并发布表情镜像
+name: Smoji-Emoji-Mirror
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
-  schedule:
-    # 每月 1 日 03:17 UTC 自动重建，跟随上游新增的表情
-    - cron: "17 3 1 * *"
 
 permissions:
   contents: read
