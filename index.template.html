@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Smoji 表情镜像站</title>
+<meta name="description" content="Smoji 图片表情的静态镜像，供 Dream表情库等工具直接下载。">
+<style>
+:root{
+  --bg:#f6f7f8;--panel:#fff;--line:#e3e5e7;--line-soft:#eef0f1;
+  --text:#111;--muted:#5b6167;--subtle:#7b8187;
+  --brand:#1f883d;--brand-dark:#1a7f37;--brand-soft:#eefaf3;
+  --radius:10px;--shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px rgba(16,24,40,.06)
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-dark)}
+.wrap{width:min(1120px,calc(100% - 40px));margin:0 auto}
+.hero{padding:56px 0 40px;background:linear-gradient(180deg,#fff 0%,#f6f7f8 100%);border-bottom:1px solid var(--line)}
+.eyebrow{margin:0 0 8px;color:var(--brand-dark);font-size:13px;font-weight:600;letter-spacing:.04em}
+h1{margin:0 0 12px;font-size:clamp(28px,4vw,40px);line-height:1.2;letter-spacing:-.02em}
+.lead{max-width:720px;margin:0 0 24px;color:var(--muted);font-size:16px}
+.base{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow)}
+.base span{flex:0 0 auto;color:var(--subtle);font-size:13px}
+.base code{flex:1 1 260px;min-width:0;padding:6px 8px;border-radius:6px;background:var(--brand-soft);color:var(--brand-dark);font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-wrap:anywhere;user-select:all}
+.hint{margin:12px 0 0;color:var(--subtle);font-size:13px}
+main{padding:40px 0 24px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 36px}
+.stat{padding:16px 18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
+.stat strong{display:block;font-size:24px;line-height:1.2;letter-spacing:-.02em}
+.stat span{color:var(--subtle);font-size:13px}
+h2{margin:0 0 16px;font-size:20px;letter-spacing:-.01em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.pack{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow);overflow:hidden}
+.thumbs{display:flex;gap:1px;background:var(--line-soft);padding:1px}
+.thumbs img{flex:1 1 0;min-width:0;display:block;aspect-ratio:1;object-fit:contain;background:#fff;padding:6px}
+.meta{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:10px 12px 4px}
+.meta h3{margin:0;font-size:15px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.meta span{flex:0 0 auto;color:var(--subtle);font-size:12px}
+.slug{display:block;padding:0 12px 12px;color:var(--subtle);font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.usage{margin:44px 0 0;padding:22px 24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
+.usage ol{margin:0 0 12px;padding-left:20px;color:var(--muted)}
+.usage li{margin:6px 0}
+.usage p{margin:0;color:var(--subtle);font-size:13px}
+footer{padding:28px 0 40px;color:var(--subtle);font-size:12px;border-top:1px solid var(--line);margin-top:36px}
+footer p{margin:4px 0}
+@media(max-width:720px){
+  .hero{padding:36px 0 28px}
+  .stats{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Dream表情库 · 镜像源</p>
+    <h1>Smoji 表情镜像站</h1>
+    <p class="lead">把 Smoji 的图片表情镜像成静态文件，供论坛、博客或自建服务直接下载。当前收录 {{TOTAL_PACKS}} 套、{{TOTAL_ITEMS}} 个表情，约 {{SIZE_MB}} MB。</p>
+    <div class="base">
+      <span>下载地址前缀</span>
+      <code>{{BASE_URL}}</code>
+    </div>
+    <p class="hint">在 Dream表情库 后台把“下载地址前缀”改成上面的地址，保存后点“下载全部已勾选”，即可从本站拉取。</p>
+  </div>
+</header>
+<main class="wrap">
+  <section class="stats">
+    <div class="stat"><strong>{{TOTAL_PACKS}}</strong><span>套表情包</span></div>
+    <div class="stat"><strong>{{TOTAL_ITEMS}}</strong><span>个表情</span></div>
+    <div class="stat"><strong>{{SIZE_MB}} MB</strong><span>镜像体积</span></div>
+  </section>
+  <section>
+    <h2>表情包</h2>
+    <div class="grid">{{PACKS}}</div>
+  </section>
+  <section class="usage">
+    <h2>如何使用</h2>
+    <ol>
+      <li>复制上面的“下载地址前缀”，注意末尾要带 <code>/</code>。</li>
+      <li>打开论坛后台 → 插件 → Dream表情库 → 图片下载源，粘贴后保存。</li>
+      <li>勾选需要的表情包，点“下载全部已勾选”，图片会保存到你自己的服务器。</li>
+    </ol>
+    <p>镜像只改变下载来源，表情最终仍然保存在你自己的论坛服务器上，前台不会请求本站。</p>
+  </section>
+</main>
+<footer class="wrap">
+  <p>生成时间：{{GENERATED}} · 目录版本：{{CATALOG_VERSION}}</p>
+  <p>表情数据来自 <a href="https://github.com/DejavuMoe/Smoji" rel="noopener">Smoji</a>，素材版权归原作者所有，仅供个人学习与交流使用。</p>
+</footer>
+</body>
+</html>
