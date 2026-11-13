@@ -30,7 +30,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: 下载表情并生成页面
-        run: python build.py --out _site --base-url "${{ steps.pages.outputs.base_url }}/" --workers 8
+        run: python build.py --out _site --base-url "${{ steps.pages.outputs.base_url }}/" --workers 16
 
       - name: 上传站点产物
         uses: actions/upload-pages-artifact@v3
